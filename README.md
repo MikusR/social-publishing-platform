@@ -20,6 +20,12 @@
 - [X] Categories
 - [X] Category Posts Pivot
 
+### Factories
+
+- [X] Users
+- [X] Posts
+- [X] Comments
+
 ### User Registration/Authentication:
 
 - [ ] Users should be able to register an account and log in using Laravel’s built-in authentication

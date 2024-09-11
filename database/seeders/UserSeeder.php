@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->count(10)
-//            ->hasPosts(1)
+            ->hasPosts(3)
             ->create();
     }
 }
