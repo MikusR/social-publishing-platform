@@ -9,7 +9,7 @@
 
 - [X] Users
 - [X] Posts
-- [ ] Comments
+- [X] Comments
 - [ ] Categories
 
 ### User Registration/Authentication:
