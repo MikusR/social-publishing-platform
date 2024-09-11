@@ -10,7 +10,7 @@
 - [X] Users
 - [X] Posts
 - [X] Comments
-- [ ] Categories
+- [X] Categories
 
 ### User Registration/Authentication:
 
