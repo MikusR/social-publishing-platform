@@ -62,6 +62,9 @@ Social Publishing Platform using Laravel 10
 
 ## Install
 
+> [!NOTE]
+> Dont't forget migrations
+
 ```bash
 composer install
 touch database/database.sqlite
