@@ -5,6 +5,13 @@
 - [X] Create a new Laravel 10 project
 - [X] Add Breeze
 
+### Models
+
+- [X] Users
+- [X] Posts
+- [ ] Comments
+- [ ] Categories
+
 ### User Registration/Authentication:
 
 - [ ] Users should be able to register an account and log in using Laravel’s built-in authentication
