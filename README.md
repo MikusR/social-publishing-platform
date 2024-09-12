@@ -25,6 +25,7 @@
 - [X] Users
 - [X] Posts
 - [X] Comments
+- [X] Categories
 
 ### User Registration/Authentication:
 
