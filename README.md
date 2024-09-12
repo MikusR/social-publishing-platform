@@ -29,9 +29,9 @@
 
 ### User Registration/Authentication:
 
-- [ ] Users should be able to register an account and log in using Laravel’s built-in authentication
+- [X] Users should be able to register an account and log in using Laravel’s built-in authentication
   system.
-- [ ] Only authenticated users can use the system(create, view, and interact with posts).
+- [ ] Only authenticated users can use the system (create, view, and interact with posts).
 
 ### Post Creation and Management:
 
