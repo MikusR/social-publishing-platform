@@ -7,7 +7,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -17,7 +19,7 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        $posts = Post::with(['user', 'categories'])->get();
+        $posts = Post::with(['user', 'categories'])->orderByDesc('created_at')->get();
         $authors = User::all();
         $categories = Category::all();
         //        dd($posts);
@@ -32,26 +34,41 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-
-        return view('posts.create');
+        return view('posts.create', [
+            'categories' => Category::all(),
+            'author' => Auth::user(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'body' => 'required',
+            'categories' => 'exists:categories,id',
+        ]);
+
+        //        dd($request->all());
+        $post = $request->user()->posts()->create($validated);
+        if ($request->has('categories')) {
+            $post->categories()->attach($validated['categories']);
+        }
+
+        return redirect(route('profile.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post): View
     {
-        //
+        return view('posts.show', ['post' => $post]);
     }
 
     /**

@@ -19,9 +19,9 @@
         <div class="mt-2 text-gray-600 prose">@markdown( $post->excerpt )</div>
     </div>
     <div class="flex justify-between items-center mt-4">
-        <a class="text-blue-500 hover:underline" href="{{$post->id}}">Read more</a>
+        <a class="text-blue-500 hover:underline" href="{{ route('posts.show', $post->id) }}">Read more</a>
         <div>
-            <a class="flex items-center" href="{{$post->user->id}}">
+            <a class="flex items-center" href="{{ route('profile.show', $post->user->id) }}">
 
                 <h1 class="text-gray-700 font-bold hover:underline">{{ $post->user->name }}</h1>
             </a>

@@ -1,5 +1,9 @@
 # Social Publishing Platform
 
+## Bugz
+
+- [ ] Categorie count in profile
+
 ## ToDo
 
 - [X] Create a new Laravel 10 project

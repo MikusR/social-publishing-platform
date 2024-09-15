@@ -9,6 +9,7 @@ Route::get('/', function () {});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 });
 
 Route::middleware('auth')->group(function () {
