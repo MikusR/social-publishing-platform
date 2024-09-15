@@ -18,11 +18,16 @@ class PostFactory extends Factory
         Log::debug('$user:'.$user->email);
 
         $date = $this->faker->dateTimeBetween($user->created_at->addMinute(), now()->addHour());
+        $body = '';
+        $paragraphs = $this->faker->paragraphs(rand(2, 6));
+        foreach ($paragraphs as $paragraph) {
+            $body .= $paragraph."\n\n";
+        }
 
         return [
             'user_id' => $user->id,
             'title' => $this->faker->words(rand(1, 4), true),
-            'body' => $this->faker->paragraphs(rand(1, 4), true),
+            'body' => $body,
             'created_at' => $date,
         ];
     }
