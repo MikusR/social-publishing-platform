@@ -19,10 +19,10 @@
         <div class="mt-2 text-gray-600 prose">@markdown( $post->body )</div>
     </div>
     <div class="flex justify-between items-center mt-4">
-        <a class="text-blue-500 hover:underline" href="#">Read more</a>
+        <a class="text-blue-500 hover:underline" href="{{$post->id}}">Read more</a>
         <div>
-            <a class="flex items-center" href="#">
-                
+            <a class="flex items-center" href="{{$post->user->id}}">
+
                 <h1 class="text-gray-700 font-bold hover:underline">{{ $post->user->name }}</h1>
             </a>
         </div>

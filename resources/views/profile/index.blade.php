@@ -20,19 +20,20 @@
                 </div>
                 <div class="-mx-8 w-4/12 hidden lg:block">
                     <div class="px-8">
-                        <h1 class="mb-4 text-xl font-bold text-gray-700">Authors</h1>
+                        <h1 class="mb-4 text-xl font-bold text-gray-700">Author</h1>
                         <div class="flex flex-col bg-white max-w-sm px-6 py-4 mx-auto rounded-lg shadow-md">
                             <ul class="-mx-4">
-                                @foreach ($authors as $author)
-                                    <x-user :author="$author"/>
-                                @endforeach
+                                {{  $author->name }}
+                                <span
+                                    class="text-gray-700 text-sm font-light">Created {{ $author->posts_count }} posts</span>
                             </ul>
                         </div>
                     </div>
                     <div class="mt-10 px-8">
                         <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
                         @foreach ($categories as $category)
-                            <x-category :category="$category" :count="$category->posts_count"/>
+                            <x-category :category="$category"
+                                        :count="$category->getUserPostsCountAttribute($author->id)"/>
                         @endforeach
                     </div>
 

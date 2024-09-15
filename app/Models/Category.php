@@ -21,4 +21,16 @@ class Category extends Model
     {
         return $this->belongsToMany(Post::class);
     }
+
+    public function getPostsCountAttribute(): int
+    {
+        return $this->posts()->count();
+    }
+
+    public function getUserPostsCountAttribute($userId)
+    {
+        return $this->whereHas('posts', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->count();
+    }
 }
