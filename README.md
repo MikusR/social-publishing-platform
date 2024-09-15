@@ -47,8 +47,8 @@
 
 ### Categories:
 
-- [ ] Categories are predefined and cannot be edited or added by users.
-- [ ] Posts can belong to multiple categories (Many-to-Many relationship), and categories can
+- [X] Categories are predefined and cannot be edited or added by users.
+- [X] Posts can belong to multiple categories (Many-to-Many relationship), and categories can
   include multiple posts.
 - [ ] Users should be able to filter posts in the main feed by category.
 
@@ -60,16 +60,17 @@
 
 ### User Profile:
 
-- [ ] Each user should have a profile page where their own posts are displayed.
-- [ ] A profile page should only show posts created by the profile owner, ordered by the most
+- [X] Each user should have a profile page where their own posts are displayed.
+- [X] A profile page should only show posts created by the profile owner, ordered by the most
   recent.
 - [ ] Visitors to the profile should be able to see the author’s posts along with the assigned
   categories.
 
 ### Main Feed:
 
-- [ ] The main feed should display posts from all users, including the post's title, content preview,
-  author’s name, categories, and the number of comments.
+- [X] The main feed should display posts from all users, including the post's title, content preview,
+  author’s name, categories
+- [ ] Posts show the number of comments.
 - [ ] Users should be able to filter posts by category and see posts from all categories by default.
 
 ### Search Functionality:
@@ -85,7 +86,7 @@ Social Publishing Platform using Laravel 10
 ## Install
 
 > [!NOTE]
-> Dont't forget migrations
+> Don't forget migrations and artisan migrate
 
 ```bash
 composer install
