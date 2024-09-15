@@ -34,4 +34,16 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function getExcerptAttribute()
+    {
+        $excerpt = $this->body;
+        $newlinePos = strpos($excerpt, "\n");
+
+        if ($newlinePos !== false) {
+            return substr($excerpt, 0, $newlinePos);
+        } else {
+            return $excerpt;
+        }
+    }
 }

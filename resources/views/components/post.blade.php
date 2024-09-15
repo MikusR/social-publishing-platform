@@ -16,7 +16,7 @@
     </div>
     <div class="mt-2">
         <a class="text-2xl text-gray-700 font-bold hover:underline" href="#">{{ $post->title }}</a>
-        <div class="mt-2 text-gray-600 prose">@markdown( $post->body )</div>
+        <div class="mt-2 text-gray-600 prose">@markdown( $post->excerpt )</div>
     </div>
     <div class="flex justify-between items-center mt-4">
         <a class="text-blue-500 hover:underline" href="{{$post->id}}">Read more</a>
