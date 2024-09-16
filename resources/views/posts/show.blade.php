@@ -12,24 +12,17 @@
                                     {{ $post->created_at }}
                                 </span>
                                 <span>
-                                    @if (count($post->categories) >= 1)
-                                        @foreach ($post->categories as $category)
-                                            <a
-                                                class="rounded bg-gray-600 px-2 py-1 font-bold text-gray-100 hover:bg-gray-500"
-                                                href="#"
-                                            >
-                                                {{ $category->name }}
-                                            </a>
+        @if (count($post->categories) >= 1)
+                                        @foreach($post->categories as $category)
+                                            <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
+                                               href="#">{{ $category->name }}</a>
                                         @endforeach
+
                                     @else
-                                        <a
-                                            class="rounded bg-gray-600 px-2 py-1 font-bold text-gray-100 hover:bg-gray-500"
-                                            href="#"
-                                        >
-                                            Uncategorized
-                                        </a>
+                                        <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
+                                           href="#">Uncategorized</a>
                                     @endif
-                                </span>
+        </span>
                             </div>
                             <div class="mt-2">
                                 <a
