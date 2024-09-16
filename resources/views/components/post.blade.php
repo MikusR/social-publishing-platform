@@ -15,14 +15,17 @@
         </span>
     </div>
     <div class="mt-2">
-        <a class="text-2xl text-gray-700 font-bold hover:underline" href="#">{{ $post->title }}</a>
+        <a class="text-2xl text-gray-700 font-bold hover:underline"
+           href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
         <div class="mt-2 text-gray-600 prose">@markdown( $post->excerpt )</div>
     </div>
     <div class="flex justify-between items-center mt-4">
         <a class="text-blue-500 hover:underline" href="{{ route('posts.show', $post->id) }}">Read more</a>
         <div>
             <a class="flex items-center" href="{{ route('profile.show', $post->user->id) }}">
-
+                <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
+                     src="https://api.dicebear.com/9.x/bottts/svg?size=32&radius=50&seed={{ $post->user->name }}"
+                     alt="avatar">
                 <h1 class="text-gray-700 font-bold hover:underline">{{ $post->user->name }}</h1>
             </a>
         </div>

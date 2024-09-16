@@ -1,57 +1,120 @@
 <x-app-layout>
-    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-
-    </div>
-    <div class="flex justify-center ">
-        <div class="px-6 py-8 bg-amber-100  w-9/12">
-            <div class="flex justify-between container mx-auto">
+    <div class="flex justify-center">
+        <div class="w-9/12 bg-amber-100 px-6 py-8">
+            <div class="container mx-auto flex justify-between">
                 <div class="w-full lg:w-8/12">
-                    <div class="flex items-center justify-between">
-                        <h1 class="text-xl font-bold text-gray-700 md:text-2xl">{{ $post->title }}</h1>
-                        <post-filter></post-filter>
-                    </div>
-
                     <div class="mt-6">
-                        <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
-                            <div class="flex justify-between items-center">
-                                <span class="font-light text-gray-600">{{ $post->created_at }}</span>
+                        <div
+                            class="max-w-4xl rounded-lg bg-white px-10 py-6 shadow-md"
+                        >
+                            <div class="flex items-center justify-between">
+                                <span class="font-light text-gray-600">
+                                    {{ $post->created_at }}
+                                </span>
                                 <span>
-        @if (count($post->categories) >= 1)
-                                        @foreach($post->categories as $category)
-                                            <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
-                                               href="#">{{ $category->name }}</a>
+                                    @if (count($post->categories) >= 1)
+                                        @foreach ($post->categories as $category)
+                                            <a
+                                                class="rounded bg-gray-600 px-2 py-1 font-bold text-gray-100 hover:bg-gray-500"
+                                                href="#"
+                                            >
+                                                {{ $category->name }}
+                                            </a>
                                         @endforeach
-
                                     @else
-                                        <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
-                                           href="#">Uncategorized</a>
+                                        <a
+                                            class="rounded bg-gray-600 px-2 py-1 font-bold text-gray-100 hover:bg-gray-500"
+                                            href="#"
+                                        >
+                                            Uncategorized
+                                        </a>
                                     @endif
-        </span>
+                                </span>
                             </div>
                             <div class="mt-2">
-                                <a class="text-2xl text-gray-700 font-bold hover:underline"
-                                   href="#">{{ $post->title }}</a>
-                                <div class="mt-2 text-gray-600 prose">@markdown( $post->body )</div>
+                                <a
+                                    class="text-2xl font-bold text-gray-700 hover:underline"
+                                    href="{{ url()->previous() }}"
+                                >
+                                    {{ $post->title }}
+                                </a>
+                                <div class="prose mt-2 text-gray-600">
+                                    @markdown($post->body)
+                                </div>
                             </div>
-
                         </div>
-
                     </div>
-
-
+                    <div class="mt-3 flex items-center justify-between">
+                        <h1 class="text-xl font-bold text-gray-700 md:text-2xl">
+                            Comments
+                        </h1>
+                    </div>
+                    @foreach ($post->comments->sortByDesc("created_at") as $comment)
+                        <div class="mt-6">
+                            <div
+                                class="max-w-4xl rounded-lg bg-white px-10 py-6 shadow-md"
+                            >
+                                <div class="flex items-center justify-between">
+                                    <span class="font-light text-gray-600">
+                                        {{ $comment->created_at }}
+                                    </span>
+                                    <span>
+                                        <div>
+                                            <a
+                                                class="flex items-center"
+                                                href="{{ route("profile.show", $comment->user->id) }}"
+                                            >
+                                                <img
+                                                    class="hidden mx-4 h-10 w-10 rounded-full object-cover sm:block"
+                                                    src="https://api.dicebear.com/9.x/bottts/svg?size=32&radius=50&seed={{ $comment->user->name }}"
+                                                    alt="avatar"
+                                                />
+                                                <h1
+                                                    class="font-bold text-gray-700 hover:underline"
+                                                >
+                                                    {{ $comment->user->name }}
+                                                </h1>
+                                            </a>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="mt-2">
+                                    <div class="prose mt-2 text-gray-600">
+                                        {{ $comment->body }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="-mx-8 w-4/12 hidden lg:block">
+                <div class="-mx-8 hidden w-4/12 lg:block">
                     <div class="px-8">
-                        <h1 class="mb-4 text-xl font-bold text-gray-700">Author</h1>
-                        <div class="flex flex-col bg-white max-w-sm px-6 py-4 mx-auto rounded-lg shadow-md">
-                            <ul class="-mx-4">
-                                <a href="{{ route('profile.index', $post->user->id) }}">
-                                {{  $post->user->name }}
-                            </ul>
+                        <h1 class="mb-4 text-xl font-bold text-gray-700">
+                            Author
+                        </h1>
+                        <div
+                            class="mx-auto flex max-w-sm flex-col rounded-lg bg-white px-6 py-4 shadow-md"
+                        >
+                            <div class="justify-left -mx-4 flex items-center">
+                                <a
+                                    class=""
+                                    href="{{ route("profile.show", $post->user->id) }}"
+                                >
+                                    <img
+                                        class="mx-4 hidden h-20 w-20 rounded-full object-cover sm:block"
+                                        src="https://api.dicebear.com/9.x/bottts/svg?size=32&radius=50&seed={{ $post->user->name }}"
+                                        alt="avatar"
+                                    />
+
+                                    <h1
+                                        class="font-bold text-gray-700 hover:underline"
+                                    >
+                                        {{ $post->user->name }}
+                                    </h1>
+                                </a>
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>

@@ -22,7 +22,6 @@ class PostController extends Controller
         $posts = Post::with(['user', 'categories'])->orderByDesc('created_at')->get();
         $authors = User::all();
         $categories = Category::all();
-        //        dd($posts);
 
         return view('posts.index', [
             'posts' => $posts,
@@ -68,6 +67,7 @@ class PostController extends Controller
      */
     public function show(Post $post): View
     {
+
         return view('posts.show', ['post' => $post]);
     }
 

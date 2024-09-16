@@ -39,13 +39,17 @@
 
 ### Post Creation and Management:
 
-- [ ] Users should be able to Create, Read, Update, and Delete their own posts.
+- [ ] Posts
+    - [X] Users should be able to Create their own posts.
+    - [ ] Users should be able to Read their own posts.
+    - [ ] Users should be able to Update their own posts.
+    - [ ] Users should be able to Delete their own posts.
 - [ ] Each post should include:
-    - [ ] Title
-    - [ ] Content (text body)
-    - [ ] Creation Date and Time
-    - [ ] The Author’s Name (auto-assigned based on the logged-in user).
-    - [ ] Posts must be assigned to one or more predefined categories (many-to-many relationship). For example,
+    - [X] Title
+    - [X] Content (text body)
+    - [X] Creation Date and Time
+    - [X] The Author’s Name (auto-assigned based on the logged-in user).
+    - [X] Posts must be assigned to one or more predefined categories (many-to-many relationship). For example,
       categories might include "Technology," "Health," or "Lifestyle."
 - [ ] Only the author of a post can edit or delete their own post.
 
@@ -67,7 +71,7 @@
 - [X] Each user should have a profile page where their own posts are displayed.
 - [X] A profile page should only show posts created by the profile owner, ordered by the most
   recent.
-- [ ] Visitors to the profile should be able to see the author’s posts along with the assigned
+- [X] Visitors to the profile should be able to see the author’s posts along with the assigned
   categories.
 
 ### Main Feed:
