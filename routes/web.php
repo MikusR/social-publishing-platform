@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {});
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile', function () {
+        return app(ProfileController::class)->show(Auth::user());
+    })->name('my-profile');
     Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 });
 

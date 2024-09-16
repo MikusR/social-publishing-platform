@@ -8,8 +8,8 @@
                             class="max-w-4xl rounded-lg bg-white px-10 py-6 shadow-md"
                         >
                             <div class="flex items-center justify-between">
-                                <span class="font-light text-gray-600">
-                                    {{ $post->created_at }}
+                                <span title="{{$post->created_at}}" class="font-light text-gray-600">
+                                    {{ $post->created_at->diffForHumans() }}
                                 </span>
                                 <span>
         @if (count($post->categories) >= 1)
@@ -48,8 +48,8 @@
                                 class="max-w-4xl rounded-lg bg-white px-10 py-6 shadow-md"
                             >
                                 <div class="flex items-center justify-between">
-                                    <span class="font-light text-gray-600">
-                                        {{ $comment->created_at }}
+                                    <span title="{{$post->created_at}}" class="font-light text-gray-600">
+                                        {{ $comment->created_at->diffForHumans() }}
                                     </span>
                                     <span>
                                         <div>

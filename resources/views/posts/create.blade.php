@@ -1,7 +1,5 @@
 <x-app-layout>
-    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
 
-    </div>
     <div class="flex justify-center ">
         <div class="px-6 py-8 bg-amber-100  w-9/12">
             <div class="flex justify-between container mx-auto">
@@ -18,7 +16,7 @@
                                           :value="old('title')"
                                           required
                                           placeholder="Enter Post Title"
-                                          autofocus/>
+                                          autofocus />
 
                             <textarea
                                 required
@@ -27,13 +25,14 @@
                                 placeholder="{{ __('Post body. You can use Markdown') }}"
                                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                             >{{ old('body') }}</textarea>
-                            <x-input-error :messages="$errors->get('body')" class="mt-2"/>
+                            <x-input-error :messages="$errors->get('body')" class="mt-2" />
                             <x-input-label for="categories" :value="__('Categories')"></x-input-label>
-                            <select name="categories[]" id="categories" multiple>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
+
+                            @foreach($categories as $category)
+                                <input type="checkbox" name="categories[]"
+                                       value="{{ $category->id }}"> {{ $category->name }} <br />
+                            @endforeach
+
                             <x-primary-button class="mt-4">{{ __('Post') }}</x-primary-button>
                         </form>
                     </div>

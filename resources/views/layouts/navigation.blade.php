@@ -11,10 +11,16 @@
                 </div>
 
             </div>
+            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
+                    <span class="text-gray-800 dark:text-amber-200 text-xl font-bold">New Post</span>
+                </x-nav-link>
+            </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-nav-link :href="route('profile.index')" :active="request()->routeIs('profile.index')">
+
+                <x-nav-link :href="route('my-profile')" :active="request()->routeIs('my-profile')">
                     <span class="text-gray-800 dark:text-gray-200 text-xl font-bold">Profile</span>
                 </x-nav-link>
                 <x-dropdown align="right" width="48">
@@ -28,7 +34,7 @@
                                      viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                           d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                          clip-rule="evenodd"/>
+                                          clip-rule="evenodd" />
                                 </svg>
                             </div>
                         </button>
@@ -60,9 +66,9 @@
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
                               stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16"/>
+                              d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                              stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                              stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -72,7 +78,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('profile.index')" :active="request()->routeIs('profile.index')">
+            <x-responsive-nav-link :href="route('my-profile')" :active="request()->routeIs('my-profile')">
                 {{ __('Profile') }}
             </x-responsive-nav-link>
         </div>

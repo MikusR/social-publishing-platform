@@ -2,7 +2,7 @@
 
 ## Bugz
 
-- [ ] Categorie count in profile
+- [X] Categorie count in profile
 
 ## ToDo
 
@@ -41,7 +41,7 @@
 
 - [ ] Posts
     - [X] Users should be able to Create their own posts.
-    - [ ] Users should be able to Read their own posts.
+    - [X] Users should be able to Read their own posts.
     - [ ] Users should be able to Update their own posts.
     - [ ] Users should be able to Delete their own posts.
 - [ ] Each post should include:
@@ -64,7 +64,7 @@
 
 - [ ] Users should be able to comment on posts.
 - [ ] Only registered users can add or delete their own comments.
-- [ ] Comments must display the author’s name and the date/time they were posted.
+- [X] Comments must display the author’s name and the date/time they were posted.
 
 ### User Profile:
 
@@ -78,7 +78,7 @@
 
 - [X] The main feed should display posts from all users, including the post's title, content preview,
   author’s name, categories
-- [ ] Posts show the number of comments.
+- [X] Posts show the number of comments.
 - [ ] Users should be able to filter posts by category and see posts from all categories by default.
 
 ### Search Functionality:

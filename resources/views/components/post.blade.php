@@ -1,6 +1,15 @@
 <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
     <div class="flex justify-between items-center">
-        <span class="font-light text-gray-600">{{ $post->created_at }}</span>
+        <span title="{{$post->created_at}}"
+              class="font-light text-gray-600">{{ $post->created_at->diffForHumans() }}</span>
+        <span>
+            @if($post->comments_count >= 1)
+                has {{$post->comments_count}} comments
+            @else
+                
+            @endif
+
+        </span>
         <span>
         @if (count($post->categories) >= 1)
                 @foreach($post->categories as $category)

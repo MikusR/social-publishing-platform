@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        $posts = Post::with(['user', 'categories'])->orderByDesc('created_at')->get();
+        $posts = Post::with(['user', 'categories'])->orderByDesc('created_at')->withCount('comments')->get();
         $authors = User::all();
         $categories = Category::all();
 
