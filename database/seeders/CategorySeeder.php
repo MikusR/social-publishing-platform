@@ -13,6 +13,10 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::factory()->create([
+            'name' => 'Uncategorized',
+            'description' => 'Default Category',
+        ]);
+        Category::factory()->create([
             'name' => 'Technology',
             'description' => 'Everything about technology',
         ]);

@@ -14,9 +14,6 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): View
     {
         $posts = Post::with(['user', 'categories'])->orderByDesc('created_at')->withCount('comments')->get();
@@ -32,9 +29,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(): View
     {
         return view('posts.create', [
@@ -43,9 +37,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
 
@@ -55,43 +46,32 @@ class PostController extends Controller
             'categories' => 'exists:categories,id',
         ]);
 
-        //        dd($request->all());
         $post = $request->user()->posts()->create($validated);
-        if ($request->has('categories')) {
+        if (($request->has('categories')) && ! empty($validated['categories'])) {
             $post->categories()->attach($validated['categories']);
+        } else {
+            $post->categories()->attach(Category::where('name', 'Uncategorized')->first());
         }
 
         return redirect(route('my-profile'));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Post $post): View
     {
 
         return view('posts.show', ['post' => $post]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Post $post)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Post $post)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
         //
