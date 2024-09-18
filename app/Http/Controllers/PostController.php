@@ -59,7 +59,7 @@ class PostController extends Controller
             $post->categories()->attach($validated['categories']);
         }
 
-        return redirect(route('profile.index'));
+        return redirect(route('my-profile'));
     }
 
     /**
