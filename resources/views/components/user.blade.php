@@ -5,7 +5,7 @@
              alt="avatar">
         <p>
         <div class="text-gray-700 font-bold mx-1 hover:underline">{{ $author->name }}</div>
-        <span class="text-gray-700 text-sm font-light">({{ $author->posts_count }})</span>
+        <span class="text-gray-700 text-sm font-light">({{ $count }})</span>
         </p>
     </a>
 </li>

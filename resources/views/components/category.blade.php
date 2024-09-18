@@ -2,7 +2,7 @@
     <p>
         <a
             class="mx-1 font-bold text-gray-700 hover:underline"
-            href="{{ route("categories.show", $category) }}"
+            href="{{ route("category.show", $category) }}"
         >
             {{ $category->name }}
         </a>

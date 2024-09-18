@@ -23,7 +23,7 @@ class ProfileController extends Controller
             $query->where('user_id', $user->id);
         }])->get();
 
-        return view('profile.index', [
+        return view('profile.show', [
             'posts' => $posts,
             'author' => $user,
             'categories' => $categories,

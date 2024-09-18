@@ -8,19 +8,20 @@ class CategoryController extends Controller
 {
     public function show(Category $category)
     {
-        $users = $category->posts()->groupBy('user')->withCount('user')->get();
-        //        dd(compact('users'));
-        //        dd($users[0]->getAttributes());
-
         $posts = $category->posts()
             ->with(['user', 'categories'])
-//            ->withCount('categories')
             ->orderByDesc('created_at')
             ->get();
         $authors = $posts->pluck('user')->unique();
         $categories = Category::all();
         $title = $category->name;
+        $userPostCounts = $posts->groupBy('user.id')->map(function ($group) {
+            return $group->count();
+        });
+        $authors->each(function ($author) use ($userPostCounts) {
+            $author->category_posts_count = $userPostCounts->get($author->id, 0);
+        });
 
-        return view('posts.index', ['title' => $title, 'posts' => $posts, 'authors' => $authors, 'categories' => $categories]);
+        return view('category.show', ['title' => $title, 'posts' => $posts, 'authors' => $authors, 'categories' => $categories]);
     }
 }

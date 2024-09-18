@@ -5,8 +5,6 @@
         <span>
             @if($post->comments_count >= 1)
                 has {{$post->comments_count}} comments
-            @else
-                
             @endif
 
         </span>
@@ -25,7 +23,8 @@
     </div>
     <div class="mt-2">
         <a class="text-2xl text-gray-700 font-bold hover:underline"
-           href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
+           href="
+           {{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
         <div class="mt-2 text-gray-600 prose">@markdown( $post->excerpt )</div>
     </div>
     <div class="flex justify-between items-center mt-4">

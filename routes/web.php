@@ -25,6 +25,6 @@ Route::middleware('auth')->group(function () {
 
 Route::Resource('posts', PostController::class)
     ->middleware(['auth']);
-Route::Resource('categories', CategoryController::class)
+Route::Resource('category', CategoryController::class)
     ->middleware(['auth']);
 require __DIR__.'/auth.php';

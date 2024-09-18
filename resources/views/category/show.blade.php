@@ -31,7 +31,7 @@
                                 @foreach ($authors as $author)
                                     <x-user
                                         :author="$author"
-                                        :count="$author->posts_count"
+                                        :count="$author->category_posts_count"
                                     />
                                 @endforeach
                             </ul>
