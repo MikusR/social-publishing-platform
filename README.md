@@ -58,7 +58,7 @@
 - [X] Categories are predefined and cannot be edited or added by users.
 - [X] Posts can belong to multiple categories (Many-to-Many relationship), and categories can
   include multiple posts.
-- [ ] Users should be able to filter posts in the main feed by category.
+- [X] Users should be able to filter posts in the main feed by category.
 
 ### Comments:
 
