@@ -22,8 +22,10 @@ class PostController extends Controller
         $posts = Post::with(['user', 'categories'])->orderByDesc('created_at')->withCount('comments')->get();
         $authors = User::all();
         $categories = Category::all();
+        $title = 'All Posts';
 
         return view('posts.index', [
+            'title' => $title,
             'posts' => $posts,
             'authors' => $authors,
             'categories' => $categories,

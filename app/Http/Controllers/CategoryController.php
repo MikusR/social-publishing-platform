@@ -6,17 +6,17 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Category $category)
     {
-        //        dd($category);
-        $posts = $category->posts()->with(['user'])->orderByDesc('created_at')->get();
+        $users = $category->posts()->groupBy('user')->withCount('user')->get();
+        //        dd(compact('users'));
+        //        dd($users[0]->getAttributes());
+
+        $posts = $category->posts()
+            ->with(['user', 'categories'])
+//            ->withCount('categories')
+            ->orderByDesc('created_at')
+            ->get();
         $authors = $posts->pluck('user')->unique();
         $categories = Category::all();
         $title = $category->name;

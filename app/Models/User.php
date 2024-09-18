@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->posts()->count();
     }
+
+    public function getCommentsCountAttribute(): int
+    {
+        return $this->comments()->count();
+    }
 }
