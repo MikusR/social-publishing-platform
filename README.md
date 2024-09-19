@@ -2,7 +2,8 @@
 
 ## Bugz
 
-- [X] Categorie count in profile
+- [X] Category count in profile
+- [X] Centered author name and avatar in post view
 
 ## ToDo
 

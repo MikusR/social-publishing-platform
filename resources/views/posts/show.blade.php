@@ -107,13 +107,13 @@
                         <div
                             class="mx-auto flex max-w-sm flex-col rounded-lg bg-white px-6 py-4 shadow-md"
                         >
-                            <div class="justify-left -mx-4 flex items-center">
+                            <div class="flex flex-col items-center">
                                 <a
-                                    class=""
+                                    class="flex flex-col items-center"
                                     href="{{ route("profile.show", $post->user->id) }}"
                                 >
                                     <img
-                                        class="mx-4 hidden h-20 w-20 rounded-full object-cover sm:block"
+                                        class="mb-4 h-20 w-20 rounded-full object-cover"
                                         src="https://api.dicebear.com/9.x/bottts/svg?size=32&radius=50&seed={{ $post->user->name }}"
                                         alt="avatar"
                                     />
