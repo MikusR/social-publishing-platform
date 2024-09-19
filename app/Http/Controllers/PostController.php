@@ -26,6 +26,7 @@ class PostController extends Controller
             'posts' => $posts,
             'authors' => $authors,
             'categories' => $categories,
+            'uncategorizedCount' => Post::whereDoesntHave('categories')->count(),
         ]);
     }
 
@@ -49,8 +50,6 @@ class PostController extends Controller
         $post = $request->user()->posts()->create($validated);
         if (($request->has('categories')) && ! empty($validated['categories'])) {
             $post->categories()->attach($validated['categories']);
-        } else {
-            $post->categories()->attach(Category::where('name', 'Uncategorized')->first());
         }
 
         return redirect(route('my-profile'));

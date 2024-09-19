@@ -12,12 +12,12 @@
         @if (count($post->categories) >= 1)
                 @foreach($post->categories as $category)
                     <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
-                       href="#">{{ $category->name }}</a>
+                       href="{{ route('category.show', $category) }}">{{ $category->name }}</a>
                 @endforeach
 
             @else
                 <a class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
-                   href="#">Uncategorized</a>
+                   href="{{ route('category.show-uncategorized') }}">Uncategorized</a>
             @endif
         </span>
     </div>

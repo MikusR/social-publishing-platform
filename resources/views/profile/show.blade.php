@@ -57,6 +57,18 @@
                                 :count="$category->user_posts_count"
                             />
                         @endforeach
+                        <br />
+                        <li class="flex items-center">
+                            <p>
+                                <a
+                                    class="mx-1 font-bold text-gray-700 hover:underline"
+                                    href="{{ route("category.show-uncategorized") }}"
+                                >
+                                    Uncategorized
+                                </a>
+                                <span class="text-sm font-light text-gray-700">({{ $uncategorizedCount }})</span>
+                            </p>
+                        </li>
                     </div>
                 </div>
             </div>

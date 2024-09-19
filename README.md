@@ -59,6 +59,7 @@
 - [X] Posts can belong to multiple categories (Many-to-Many relationship), and categories can
   include multiple posts.
 - [X] Users should be able to filter posts in the main feed by category.
+- [X] Have Uncategorized posts.
 
 ### Comments:
 
@@ -79,7 +80,7 @@
 - [X] The main feed should display posts from all users, including the post's title, content preview,
   author’s name, categories
 - [X] Posts show the number of comments.
-- [ ] Users should be able to filter posts by category and see posts from all categories by default.
+- [X] Users should be able to filter posts by category and see posts from all categories by default.
 
 ### Search Functionality:
 

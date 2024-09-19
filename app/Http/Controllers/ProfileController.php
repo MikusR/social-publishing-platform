@@ -22,11 +22,13 @@ class ProfileController extends Controller
         })->withCount(['posts as user_posts_count' => function ($query) use ($user) {
             $query->where('user_id', $user->id);
         }])->get();
+        $uncategorizedCount = Post::where('user_id', $user->id)->whereDoesntHave('categories')->count();
 
         return view('profile.show', [
             'posts' => $posts,
             'author' => $user,
             'categories' => $categories,
+            'uncategorizedCount' => $uncategorizedCount,
         ]);
     }
 }

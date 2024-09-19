@@ -25,6 +25,10 @@ Route::middleware('auth')->group(function () {
 
 Route::Resource('posts', PostController::class)
     ->middleware(['auth']);
-Route::Resource('category', CategoryController::class)
-    ->middleware(['auth']);
+
+Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
+    Route::get('uncategorized', [CategoryController::class, 'showUncategorized'])->name('show-uncategorized');
+    Route::get('{category}', [CategoryController::class, 'show'])->name('show');
+})->middleware(['auth']);
+
 require __DIR__.'/auth.php';
