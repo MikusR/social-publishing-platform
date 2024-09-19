@@ -35,7 +35,7 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function getExcerptAttribute()
+    public function getExcerptAttribute(): string
     {
         $excerpt = $this->body;
         $newlinePos = strpos($excerpt, "\n");

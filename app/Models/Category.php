@@ -21,9 +21,4 @@ class Category extends Model
     {
         return $this->belongsToMany(Post::class);
     }
-
-    //    public function getPostsCountAttribute(): int
-    //    {
-    //        return $this->posts()->count();
-    //    }
 }
