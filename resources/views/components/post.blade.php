@@ -38,4 +38,11 @@
             </a>
         </div>
     </div>
+    @if ($post->user_id == auth()->id())
+        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <x-danger-button class="mt-4">Delete Post</x-danger-button>
+        </form>
+    @endif
 </div>

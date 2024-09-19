@@ -4,6 +4,12 @@
             <div class="container mx-auto flex justify-between">
                 <div class="w-full lg:w-8/12">
                     <div class="mt-6">
+                        @if(Session::has('success'))
+                            <p class="bg-green-500 p-4 rounded-md text-white">{{ Session::get('success') }}</p>
+                        @endif
+                        @if(Session::has('error'))
+                            <p class="bg-red-500 p-4 rounded-md text-white">{{ Session::get('error') }}</p>
+                        @endif
                         <div
                             class="max-w-4xl rounded-lg bg-white px-10 py-6 shadow-md"
                         >
@@ -36,6 +42,13 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($post->user_id == auth()->id())
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <x-danger-button class="mt-4">Delete Post</x-danger-button>
+                            </form>
+                        @endif
                     </div>
                     <div class="mt-3 flex items-center justify-between">
                         <h1 class="text-xl font-bold text-gray-700 md:text-2xl">

@@ -44,8 +44,8 @@
     - [X] Users should be able to Create their own posts.
     - [X] Users should be able to Read their own posts.
     - [ ] Users should be able to Update their own posts.
-    - [ ] Users should be able to Delete their own posts.
-- [ ] Each post should include:
+    - [X] Users should be able to Delete their own posts.
+- [X] Each post should include:
     - [X] Title
     - [X] Content (text body)
     - [X] Creation Date and Time

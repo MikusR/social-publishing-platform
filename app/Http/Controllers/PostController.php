@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -60,7 +61,6 @@ class PostController extends Controller
 
     public function show(Post $post): View
     {
-
         return view('posts.show', ['post' => $post]);
     }
 
@@ -76,6 +76,16 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        //
+        if ($post->user_id !== Auth::user()->id) {
+            abort(403);
+        }
+
+        $post->delete();
+
+        if (URL::previous() === route('posts.show', $post->id)) {
+            return redirect(route('posts.index'))->with('success', 'Post deleted successfully');
+        } else {
+            return redirect()->back()->with('success', 'Post deleted successfully');
+        }
     }
 }

@@ -7,7 +7,12 @@
                         <h1 class="text-xl font-bold text-gray-700 md:text-2xl">
                             Posts
                         </h1>
-                        <post-filter></post-filter>
+                        @if(Session::has('success'))
+                            <p class="bg-green-500 p-4 rounded-md text-white">{{ Session::get('success') }}</p>
+                        @endif
+                        @if(Session::has('error'))
+                            <p class="bg-red-500 p-4 rounded-md text-white">{{ Session::get('error') }}</p>
+                        @endif
                     </div>
                     @foreach ($posts as $post)
                         <div class="mt-6">
