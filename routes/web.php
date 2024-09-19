@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::Resource('posts', PostController::class)
+    ->middleware(['auth']);
+
+Route::Resource('comments', CommentController::class)
     ->middleware(['auth']);
 
 Route::group(['prefix' => 'category', 'as' => 'category.'], function () {

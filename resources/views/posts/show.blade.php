@@ -42,6 +42,25 @@
                             Comments
                         </h1>
                     </div>
+                    <form method="POST" action="{{ route("comments.store", $post->id) }}">
+                        @csrf
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                        <div class="mt-6">
+                            <x-text-input
+                                id="body"
+                                name="body"
+                                type="text"
+                                class="block w-full"
+                                placeholder="Leave a comment"
+                                required
+                            />
+                        </div>
+                        <div class="mt-6">
+                            <x-primary-button>
+                                Submit
+                            </x-primary-button>
+                        </div>
+                    </form>
                     @foreach ($post->comments->sortByDesc("created_at") as $comment)
                         <div class="mt-6">
                             <div

@@ -63,7 +63,7 @@
 
 ### Comments:
 
-- [ ] Users should be able to comment on posts.
+- [X] Users should be able to comment on posts.
 - [ ] Only registered users can add or delete their own comments.
 - [X] Comments must display the author’s name and the date/time they were posted.
 
