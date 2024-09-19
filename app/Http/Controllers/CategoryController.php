@@ -17,7 +17,7 @@ class CategoryController extends Controller
             ->orderByDesc('created_at')
             ->get();
         $authors = $posts->pluck('user')->unique();
-        $categories = Category::all();
+        $categories = Category::withCount('posts')->get();
         $title = $category->name;
         $userPostCounts = $posts->groupBy('user.id')->map(function ($group) {
             return $group->count();
@@ -42,7 +42,7 @@ class CategoryController extends Controller
             ->orderByDesc('created_at')
             ->get();
         $authors = $posts->pluck('user')->unique();
-        $categories = Category::all();
+        $categories = Category::withCount('posts')->get();
         $userPostCounts = $posts->groupBy('user.id')->map(function ($group) {
             return $group->count();
         });

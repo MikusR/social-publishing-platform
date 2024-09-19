@@ -13,6 +13,7 @@ class ProfileController extends Controller
 {
     public function show(User $user): View
     {
+        $author = User::withCount(['posts', 'comments'])->where('id', $user->id)->first();
         $posts = Post::with(['categories', 'user', 'comments'])
             ->withCount('comments')
             ->where('user_id', $user->id)
@@ -26,7 +27,7 @@ class ProfileController extends Controller
 
         return view('profile.show', [
             'posts' => $posts,
-            'author' => $user,
+            'author' => $author,
             'categories' => $categories,
             'uncategorizedCount' => $uncategorizedCount,
         ]);
