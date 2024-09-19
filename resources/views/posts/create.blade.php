@@ -45,10 +45,12 @@
                             @foreach ($categories as $category)
                                 <input
                                     type="checkbox"
+                                    id="check_{{ $category->name }}"
                                     name="categories[]"
                                     value="{{ $category->id }}"
                                 />
-                                {{ $category->name }}
+                                <label for="check_{{ $category->name }}">{{ $category->name }}</label>
+
                                 <br />
                             @endforeach
 
