@@ -3,13 +3,13 @@
         <div class="w-9/12 bg-amber-100 px-6 py-8">
             <div class="container mx-auto flex justify-between">
                 <div class="w-full lg:w-8/12">
+                    @if(Session::has('success'))
+                        <p class="bg-green-500 p-4 rounded-md text-white">{{ Session::get('success') }}</p>
+                    @endif
+                    @if(Session::has('error'))
+                        <p class="bg-red-500 p-4 rounded-md text-white">{{ Session::get('error') }}</p>
+                    @endif
                     <div class="mt-6">
-                        @if(Session::has('success'))
-                            <p class="bg-green-500 p-4 rounded-md text-white">{{ Session::get('success') }}</p>
-                        @endif
-                        @if(Session::has('error'))
-                            <p class="bg-red-500 p-4 rounded-md text-white">{{ Session::get('error') }}</p>
-                        @endif
                         <div
                             class="max-w-4xl rounded-lg bg-white px-10 py-6 shadow-md"
                         >
@@ -108,7 +108,15 @@
                                         {{ $comment->body }}
                                     </div>
                                 </div>
+                                @if ($comment->user_id == auth()->id())
+                                    <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-danger-button class="mt-4">Delete Comment</x-danger-button>
+                                    </form>
+                                @endif
                             </div>
+
                         </div>
                     @endforeach
                 </div>
