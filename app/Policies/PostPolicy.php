@@ -11,11 +11,11 @@ class PostPolicy
 {
     public function update(User $user, Post $post): bool
     {
-        return $user->id === $post->user_id;
+        return $post->user()->is($user);
     }
 
     public function delete(User $user, Post $post): bool
     {
-        return $user->id === $post->user_id;
+        return $post->user()->is($user);
     }
 }
