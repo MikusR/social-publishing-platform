@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\View\View;
 
@@ -44,7 +45,6 @@ class PostController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required',
@@ -66,11 +66,15 @@ class PostController extends Controller
 
     public function edit(Post $post): View
     {
+        Gate::authorize('update', $post);
+
         return view('posts.edit', ['post' => $post, 'categories' => Category::all(), 'author' => Auth::user()]);
     }
 
     public function update(Request $request, Post $post): RedirectResponse
     {
+        Gate::authorize('update', $post);
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required',
@@ -92,9 +96,7 @@ class PostController extends Controller
 
     public function destroy(Post $post): RedirectResponse
     {
-        if ($post->user_id !== Auth::user()->id) {
-            abort(403);
-        }
+        Gate::authorize('delete', $post);
 
         $post->delete();
 

@@ -16,6 +16,10 @@
                             <div class="flex items-center justify-between">
                                 <span title="{{$post->created_at}}" class="font-light text-gray-600">
                                     {{ $post->created_at->diffForHumans() }}
+                                    @unless ($post->created_at->eq($post->updated_at))
+                                        <small
+                                            class="text-sm text-gray-400"> &middot; {{ __('edited') }} {{ $post->updated_at->diffForHumans()}}</small>
+                                    @endunless
                                 </span>
                                 <span>
         @if (count($post->categories) >= 1)
@@ -31,31 +35,29 @@
         </span>
                             </div>
                             <div class="mt-2">
-                                <a
-                                    class="text-2xl font-bold text-gray-700 hover:underline"
-                                    href="{{ url()->previous() }}"
-                                >
+                                <h1 class="text-2xl font-bold text-gray-700">
                                     {{ $post->title }}
-                                </a>
+                                </h1>
                                 <div class="prose mt-2 text-gray-600">
                                     @markdown($post->body)
                                 </div>
                             </div>
+                            @if ($post->user_id == auth()->id())
+                                <div class="flex mt-4 items-center justify-between">
+                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-danger-button class="mt-4">Delete Post</x-danger-button>
+                                    </form>
+                                    <form method="GET" action="{{ route('posts.edit', $post->id) }}">
+                                        @csrf
+                                        @method('GET')
+                                        <x-primary-button class="mt-4">Edit Post</x-primary-button>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
-                        @if ($post->user_id == auth()->id())
-                            <div class="flex mt-4 items-center justify-between">
-                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <x-danger-button class="mt-4">Delete Post</x-danger-button>
-                                </form>
-                                <form method="GET" action="{{ route('posts.edit', $post->id) }}">
-                                    @csrf
-                                    @method('GET')
-                                    <x-primary-button class="mt-4">Edit Post</x-primary-button>
-                                </form>
-                            </div>
-                        @endif
+
                     </div>
                     <div class="mt-3 flex items-center justify-between">
                         <h1 class="text-xl font-bold text-gray-700 md:text-2xl">
@@ -116,11 +118,18 @@
                                     </div>
                                 </div>
                                 @if ($comment->user_id == auth()->id())
-                                    <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-danger-button class="mt-4">Delete Comment</x-danger-button>
-                                    </form>
+                                    <div class="flex items-center justify-between">
+                                        <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-danger-button class="mt-4">Delete Comment</x-danger-button>
+                                        </form>
+                                        <form method="GET" action="{{ route('comments.edit', $comment->id) }}">
+                                            @csrf
+                                            @method('GET')
+                                            <x-primary-button class="mt-4">Edit Comment</x-primary-button>
+                                        </form>
+                                    </div>
                                 @endif
                             </div>
 
