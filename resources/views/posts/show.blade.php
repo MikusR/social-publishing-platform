@@ -43,11 +43,18 @@
                             </div>
                         </div>
                         @if ($post->user_id == auth()->id())
-                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <x-danger-button class="mt-4">Delete Post</x-danger-button>
-                            </form>
+                            <div class="flex mt-4 items-center justify-between">
+                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-danger-button class="mt-4">Delete Post</x-danger-button>
+                                </form>
+                                <form method="GET" action="{{ route('posts.edit', $post->id) }}">
+                                    @csrf
+                                    @method('GET')
+                                    <x-primary-button class="mt-4">Edit Post</x-primary-button>
+                                </form>
+                            </div>
                         @endif
                     </div>
                     <div class="mt-3 flex items-center justify-between">

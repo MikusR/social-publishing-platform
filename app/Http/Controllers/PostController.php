@@ -56,7 +56,7 @@ class PostController extends Controller
             $post->categories()->attach($validated['categories']);
         }
 
-        return redirect(route('my-profile'));
+        return redirect(route('posts.show', $post->id))->with('success', 'Post created successfully');
     }
 
     public function show(Post $post): View
@@ -64,17 +64,33 @@ class PostController extends Controller
         return view('posts.show', ['post' => $post]);
     }
 
-    public function edit(Post $post)
+    public function edit(Post $post): View
     {
-        //
+        return view('posts.edit', ['post' => $post, 'categories' => Category::all(), 'author' => Auth::user()]);
     }
 
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $post): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'body' => 'required',
+            'categories' => 'exists:categories,id',
+        ]);
+
+        $post->update($validated);
+
+        if (empty($validated['categories'])) {
+            $post->categories()->detach();
+        }
+
+        if (($request->has('categories')) && ! empty($validated['categories'])) {
+            $post->categories()->sync($validated['categories']);
+        }
+
+        return redirect(route('posts.show', $post->id))->with('success', 'Post updated successfully');
     }
 
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
         if ($post->user_id !== Auth::user()->id) {
             abort(403);
