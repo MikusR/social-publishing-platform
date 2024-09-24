@@ -60,9 +60,6 @@
                         </form>
                     </div>
 
-                    <div class="mt-8">
-                        <Pagination></Pagination>
-                    </div>
                 </div>
                 <div class="-mx-8 hidden w-4/12 lg:block">
                     <div class="px-8">
@@ -72,32 +69,25 @@
                         <div
                             class="mx-auto flex max-w-sm flex-col rounded-lg bg-white px-6 py-4 shadow-md"
                         >
-                            <ul class="-mx-4">
-                                {{ $author->name }}
-                            </ul>
+                            <div class="flex flex-col items-center">
+
+                                <img
+                                    class="mb-4 h-20 w-20 rounded-full object-cover"
+                                    src="https://api.dicebear.com/9.x/bottts/svg?size=32&radius=50&seed={{ $author->name }}"
+                                    alt="avatar"
+                                />
+
+                                <h1
+                                    class="font-bold text-gray-700 "
+                                >
+                                    {{ $author->name }}
+                                </h1>
+
+                            </div>
                         </div>
                     </div>
                     <div class="mt-10 px-8">
-                        <h1 class="mb-4 text-xl font-bold text-gray-700">
-                            Categories
-                        </h1>
-                        @foreach ($categories as $category)
-                            <li class="flex items-center">
-                                <p>
-                                    <a
-                                        class="mx-1 font-bold text-gray-700 hover:underline"
-                                        href="#"
-                                    >
-                                        {{ $category->name }}
-                                    </a>
-                                    <span
-                                        class="text-sm font-light text-gray-700"
-                                    >
-                                        +
-                                    </span>
-                                </p>
-                            </li>
-                        @endforeach
+
                     </div>
                 </div>
             </div>
