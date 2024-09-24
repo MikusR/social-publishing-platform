@@ -29,4 +29,6 @@ npm run build
 
 ## Screenshots
 
-![]()
+![All Posts](docs/images/all-posts.png)
+
+![Single Post](docs/images/post-view.png)
