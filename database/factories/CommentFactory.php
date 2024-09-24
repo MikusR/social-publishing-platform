@@ -15,7 +15,7 @@ class CommentFactory extends Factory
     {
         $user = User::inRandomOrder()->first() ?? User::factory()->create();
         $post = Post::inRandomOrder()->first() ?? Post::factory()->create();
-        $date = $this->faker->dateTimeBetween($post->created_at->addMinute(), now()->addHour());
+        $date = $this->faker->dateTimeBetween($post->created_at->addMinute(), max(now(), $post->created_at->addMinutes(2)));
 
         return [
             'user_id' => $user->id,
