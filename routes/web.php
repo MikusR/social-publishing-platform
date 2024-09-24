@@ -9,7 +9,13 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {});
+Route::get('/', function () {
+    return redirect()->route('login');
+})->middleware('guest');
+
+Route::get('/', function () {
+    return redirect()->route('posts.index');
+})->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {
