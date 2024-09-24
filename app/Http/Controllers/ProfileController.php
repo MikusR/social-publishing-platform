@@ -1,60 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    public function show(User $user): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+        $author = User::withCount(['posts', 'comments'])->where('id', $user->id)->first();
+        $posts = Post::with(['categories', 'user', 'comments'])
+            ->withCount('comments')
+            ->where('user_id', $user->id)
+            ->orderByDesc('created_at')->get();
+        $categories = Category::whereHas('posts', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->withCount(['posts as user_posts_count' => function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        }])->get();
+        $uncategorizedCount = Post::where('user_id', $user->id)->whereDoesntHave('categories')->count();
+
+        return view('profile.show', [
+            'posts' => $posts,
+            'author' => $author,
+            'categories' => $categories,
+            'uncategorizedCount' => $uncategorizedCount,
         ]);
-    }
-
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
     }
 }
