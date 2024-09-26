@@ -20,6 +20,21 @@
                     </x-nav-link>
                 </div>
             </div>
+            <div class="flex-1 sm:ms-6 sm:flex sm:items-center">
+                <form class="flex w-full" method="POST" action="{{ route('search') }}">
+                    @csrf
+                    <input id="search"
+                           required
+                           minlength="3"
+                           name="search"
+                           class="flex-grow bg-amber-100 border-gray-300 dark:border-gray-700 dark:text-gray-700 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-l-md shadow-sm"
+                           type="search" placeholder="search..." />
+                    <x-search-button>Search</x-search-button>
+                </form>
+
+            </div>
+
+            <!-- Settings Dropdown -->
             <div class="hidden sm:ms-6 sm:flex sm:items-center">
                 <x-nav-link
                     :href="route('posts.create')"
@@ -31,10 +46,6 @@
                         New Post
                     </span>
                 </x-nav-link>
-            </div>
-
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:ms-6 sm:flex sm:items-center">
                 <x-nav-link
                     :href="route('my-profile')"
                     :active="request()->routeIs('my-profile')"
