@@ -39,19 +39,15 @@ RUN chown -R www-data:www-data /var/www && \
 # Expose PHP-FPM port
 EXPOSE 9000
 
-# Create entrypoint script
-RUN echo '#!/bin/bash\n\
-# Ensure proper permissions on startup\n\
-chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/database\n\
-chmod -R 775 /var/www/storage /var/www/bootstrap/cache\n\
-chmod 664 /var/www/database/database.sqlite\n\
-# Run migrations\n\
-php artisan migrate --force\n\
-# Start PHP-FPM\n\
-php-fpm\n\
-' > /var/www/entrypoint.sh
-
-RUN chmod +x /var/www/entrypoint.sh
+# Create a proper entrypoint script
+RUN echo '#!/bin/sh' > /usr/local/bin/entrypoint.sh && \
+    echo 'set -e' >> /usr/local/bin/entrypoint.sh && \
+    echo 'chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/database' >> /usr/local/bin/entrypoint.sh && \
+    echo 'chmod -R 775 /var/www/storage /var/www/bootstrap/cache' >> /usr/local/bin/entrypoint.sh && \
+    echo 'chmod 664 /var/www/database/database.sqlite || true' >> /usr/local/bin/entrypoint.sh && \
+    echo 'php artisan migrate --force' >> /usr/local/bin/entrypoint.sh && \
+    echo 'php-fpm' >> /usr/local/bin/entrypoint.sh && \
+    chmod +x /usr/local/bin/entrypoint.sh
 
 # Run Laravel migrations and start PHP-FPM
-CMD ["/var/www/entrypoint.sh"]
+CMD ["/usr/local/bin/entrypoint.sh"]
