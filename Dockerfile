@@ -22,6 +22,7 @@ COPY . .
 
 # Set permissions for Laravel
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chmod -R 777 /var/www/storage /var/www/bootstrap/cache /var/www/database
 
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
