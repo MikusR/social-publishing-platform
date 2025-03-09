@@ -20,18 +20,38 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy Laravel app code to the container
 COPY . .
 
-# Set permissions for Laravel
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-RUN chmod -R 777 /var/www/storage /var/www/bootstrap/cache /var/www/database
-
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Ensure SQLite database file exists
-RUN touch database/database.sqlite && chmod -R 777 database
+# Create SQLite database directory if not exists
+RUN mkdir -p /var/www/database
+
+# Ensure SQLite database file exists with proper permissions
+RUN touch /var/www/database/database.sqlite
+
+# Set proper permissions for Laravel
+RUN chown -R www-data:www-data /var/www && \
+    find /var/www/storage -type d -exec chmod 775 {} \; && \
+    find /var/www/storage -type f -exec chmod 664 {} \; && \
+    chmod -R 775 /var/www/bootstrap/cache && \
+    chmod -R 775 /var/www/database
 
 # Expose PHP-FPM port
 EXPOSE 9000
 
+# Create entrypoint script
+RUN echo '#!/bin/bash\n\
+# Ensure proper permissions on startup\n\
+chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/database\n\
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache\n\
+chmod 664 /var/www/database/database.sqlite\n\
+# Run migrations\n\
+php artisan migrate --force\n\
+# Start PHP-FPM\n\
+php-fpm\n\
+' > /var/www/entrypoint.sh
+
+RUN chmod +x /var/www/entrypoint.sh
+
 # Run Laravel migrations and start PHP-FPM
-CMD php artisan migrate --force && php-fpm
+CMD ["/var/www/entrypoint.sh"]
