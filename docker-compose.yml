@@ -1,7 +1,7 @@
 services:
     app:
         build: .
-        container_name: laravel-app
+        container_name: social-publishing-platform-app
         restart: unless-stopped
         working_dir: /var/www
         user: www-data
@@ -17,7 +17,7 @@ services:
 
     nginx:
         image: nginx:latest
-        container_name: laravel-nginx
+        container_name: social-publishing-platform-nginx
         restart: unless-stopped
         ports:
             - "8000:80"
