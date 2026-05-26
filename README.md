@@ -12,7 +12,7 @@ Social Publishing Platform using Laravel 10
 ```bash
 git clone https://github.com/MikusR/social-publishing-platform.git
 composer install
-npm install
+pnpm install
 touch database/database.sqlite
 php artisan migrate
 php artisan migrate:fresh --seed --seeder=CategorySeeder
