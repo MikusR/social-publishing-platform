@@ -16,7 +16,7 @@ pnpm install
 touch database/database.sqlite
 php artisan migrate
 php artisan migrate:fresh --seed --seeder=CategorySeeder
-npm run build
+pnpm run build
 ```
 
 ## Technologies Used
